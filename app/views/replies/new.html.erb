@@ -1,0 +1,25 @@
+<div class="section">
+  <%# @reply=Reply.new %>
+<%= form_for @reply do |f| %>
+<div class="field">
+    <div class="control">
+    <%= f.label :comment %>
+    <%= f.select :comment_id,@comments %>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= f.label :reply %>
+     <%= f.text_field :reply %>
+    </div>
+  </div>
+  <%= f.submit 'reply', class: "button is-primary" %>
+<% end %>
+</div>

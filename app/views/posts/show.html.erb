@@ -3,13 +3,11 @@
 <section class="section">
     <div class="container">
         <nav class="level">
-          <!-- Left side -->
           <div class="level-left">
             <p class="level-item">
                 <strong>Actions</strong>
             </p>
           </div>
-          <!-- Right side -->
           <div class="level-right">
               <p class="level-item">
                 <%= link_to "Edit", edit_post_path(@post), class:"button" %>
@@ -30,11 +28,54 @@
 <section class="section comments">
     <div class="container">
         <h2 class="subtitle is-5"><strong><%= @post.comments.count %></strong> Comments</h2>
-        <%= render @post.comments %>
+        <%#= render @post.comments %>
+        <% @post.comments.each do |comment| %>
+         <h3><div style = "font-weight: bold"><%= comment.name %>:<%= comment.comment %></div><h3>
+          <h3 class="subtitle is-3">reply</h3>
+          <% comment.replies.each do |reply| %>
+              <div class="content-box border-box">
+                <%= reply.name %>:<%= reply.reply %>
+              </div>
+
+           <% end %>
+           <% end %>
         <div class="comment-form">
             <hr />
             <h3 class="subtitle is-3">Leave a comment</h3>
              <%= render 'comments/form' %>
         </div>
-    </div>
+        <h1><%= link_to 'new reply', new_reply_path %><h1>
+        <br>
+        <br>
 </section>
+
+<style>
+/*div {
+  width: 160px;
+  height: 80px;
+  padding: 20px;
+  border: 8px solid red;
+  background: yellow;
+}*/
+
+.content-box {
+  box-sizing: content-box;
+  /* Total width: 160px + (2 * 20px) + (2 * 8px) = 216px
+     Total height: 80px + (2 * 20px) + (2 * 8px) = 136px
+     Content box width: 160px
+     Content box height: 80px */
+}
+
+.border-box {
+  width: 200px;
+  height: 10px;
+  padding: 20px;
+  border: 4px solid red;
+  background: yellow;
+
+  /* Total width: 160px
+     Total height: 80px
+     Content box width: 160px - (2 * 20px) - (2 * 8px) = 104px
+     Content box height: 80px - (2 * 20px) - (2 * 8px) = 24px */
+}
+</style>
